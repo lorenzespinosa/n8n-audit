@@ -122,10 +122,13 @@ export function targetsOf(connections, nodeName) {
 export function connectedNames(connections) {
   const names = new Set();
   if (!isPlainObject(connections)) return names;
-  for (const [source, entry] of Object.entries(connections)) {
+  for (const source of Object.keys(connections)) {
+    const entry = connections[source];
     if (!isPlainObject(entry)) continue;
-    names.add(source);
-    for (const targets of targetsOf(connections, source)) names.add(targets);
+    const targets = targetsOf(connections, source);
+    // a source key with no wired edge is a dead node, not a connected one
+    if (targets.length > 0) names.add(source);
+    for (const target of targets) names.add(target);
   }
   return names;
 }
@@ -138,7 +141,12 @@ export function hasWiredErrorOutput(connections, nodeName) {
   const entry = isPlainObject(connections) ? connections[nodeName] : null;
   if (!isPlainObject(entry) || !Array.isArray(entry.main)) return false;
   const second = entry.main[1];
-  return Array.isArray(second) && second.length > 0;
+  // a malformed entry like [null] has no wired destination and must not
+  // count as error handling
+  return (
+    Array.isArray(second) &&
+    second.some((c) => isPlainObject(c) && typeof c.node === 'string')
+  );
 }
 
 /**
@@ -147,35 +155,50 @@ export function hasWiredErrorOutput(connections, nodeName) {
  * are cut at the first repeat instead of looping forever.
  */
 export function longestChain(connections) {
+  // Iterative post-order walk (deep linear workflows must not blow the
+  // call stack) over a canonically sorted graph, so scores cannot depend
+  // on connection key order. Cyclic paths are cut at the first repeat;
+  // that makes the result an approximation for cyclic workflows, but a
+  // deterministic one.
   const graph = new Map();
   if (isPlainObject(connections)) {
     for (const source of Object.keys(connections)) {
-      graph.set(source, targetsOf(connections, source));
+      graph.set(
+        source,
+        targetsOf(connections, source).slice().sort()
+      );
     }
   }
 
   const memo = new Map();
-  const onStack = new Set();
+  const order = [...graph.keys()].sort();
 
-  const visit = (name) => {
-    const seen = memo.get(name);
-    if (seen !== undefined) return seen;
-    if (onStack.has(name)) return 0;
-    onStack.add(name);
-    let best = 0;
-    for (const target of graph.get(name) || []) {
-      best = Math.max(best, visit(target));
+  for (const start of order) {
+    if (memo.has(start)) continue;
+    const stack = [[start, false]];
+    const path = new Set();
+    while (stack.length > 0) {
+      const [name, ready] = stack.pop();
+      if (ready) {
+        let best = 0;
+        for (const target of graph.get(name) || []) {
+          best = Math.max(best, memo.get(target) ?? 0);
+        }
+        memo.set(name, best + 1);
+        path.delete(name);
+        continue;
+      }
+      if (memo.has(name) || path.has(name)) continue;
+      path.add(name);
+      stack.push([name, true]);
+      for (const target of graph.get(name) || []) {
+        if (!memo.has(target)) stack.push([target, false]);
+      }
     }
-    onStack.delete(name);
-    const depth = best + 1;
-    memo.set(name, depth);
-    return depth;
-  };
+  }
 
   let longest = 0;
-  for (const name of graph.keys()) {
-    longest = Math.max(longest, visit(name));
-  }
+  for (const depth of memo.values()) longest = Math.max(longest, depth);
   return longest;
 }
 
@@ -184,16 +207,19 @@ export function longestChain(connections) {
  * string leaf. Used by the credential scanner.
  */
 export function walkStrings(root, visit) {
-  const walk = (value, key) => {
+  // iterative: parameter trees can nest far deeper than the call stack
+  const todo = [[root, undefined]];
+  while (todo.length > 0) {
+    const [value, key] = todo.pop();
     if (typeof value === 'string') {
       visit(value, key);
     } else if (Array.isArray(value)) {
-      for (const item of value) walk(item, key);
+      for (let i = value.length - 1; i >= 0; i--) todo.push([value[i], key]);
     } else if (isPlainObject(value)) {
       for (const [childKey, child] of Object.entries(value)) {
-        walk(child, childKey);
+        todo.push([child, childKey]);
       }
     }
-  };
-  walk(root, undefined);
+  }
 }
+

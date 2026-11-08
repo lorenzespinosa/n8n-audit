@@ -64,8 +64,15 @@ export function parseArgs(argv) {
         throw new AuditError(`${arg} needs a value`);
       }
       if (arg.startsWith('--min-score')) {
+        // Number('') is 0, so a blank value must be rejected explicitly:
+        // an unset shell variable must fail the run, not silently pass it
         const num = Number(value);
-        if (!Number.isInteger(num) || num < 0 || num > 100) {
+        if (
+          value === undefined ||
+          !/^\d+$/.test(String(value).trim()) ||
+          num < 0 ||
+          num > 100
+        ) {
           throw new AuditError(`--min-score needs an integer from 0 to 100, got '${value}'`);
         }
         parsed.minScore = num;
@@ -126,14 +133,22 @@ export function run(argv, out = process.stdout, err = process.stderr) {
     return 2;
   }
 
-  const report = buildReport({
-    entries: collected.entries,
-    skipped: collected.skipped,
-    filesScanned: collected.filesScanned,
-    minScore: parsed.minScore,
-    version: getVersion(),
-    root: parsed.target,
-  });
+  let report;
+  try {
+    report = buildReport({
+      entries: collected.entries,
+      skipped: collected.skipped,
+      filesScanned: collected.filesScanned,
+      minScore: parsed.minScore,
+      version: getVersion(),
+      root: parsed.target,
+    });
+  } catch (error) {
+    // a workflow shape the scorer cannot handle is a scanner failure,
+    // not a clean bill of health
+    err.write(`n8n-audit: scoring failed: ${error.message}\n`);
+    return 2;
+  }
 
   const render = parsed.format === 'html' ? renderHtml : parsed.format === 'json' ? renderJson : renderMarkdown;
   out.write(render(report));

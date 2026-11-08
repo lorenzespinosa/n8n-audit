@@ -1,5 +1,16 @@
+function text(value) {
+  // workflow-derived text can carry markdown structure and raw HTML:
+  // neutralize both, and fold newlines so nothing can start a new line
+  return String(value)
+    .replace(/\r?\n/g, ' ')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/([\\`|[\]*_"~])/g, '\\$1');
+}
+
 function cell(value) {
-  return String(value).replaceAll('|', '\\|');
+  return text(value).replaceAll('|', '\\|');
 }
 
 export function renderMarkdown(report) {
@@ -31,9 +42,9 @@ export function renderMarkdown(report) {
   }
 
   for (const workflow of report.workflows) {
-    lines.push(`## ${workflow.score}/100 ${workflow.name}`);
+    lines.push(`## ${workflow.score}/100 ${text(workflow.name)}`);
     lines.push('');
-    lines.push(`File: ${workflow.file}`);
+    lines.push(`File: ${text(workflow.file)}`);
     lines.push('');
     for (const category of workflow.categories) {
       lines.push(`### ${category.label} ${category.score}/${category.max}`);
@@ -42,7 +53,7 @@ export function renderMarkdown(report) {
         lines.push('- No findings.');
       } else {
         for (const finding of category.findings) {
-          const line = `${finding.node ? `'${finding.node}' ` : ''}${finding.detail}.`;
+          const line = `${finding.node ? `'${text(finding.node)}' ` : ''}${text(finding.detail)}.`;
           lines.push(`- ${line.charAt(0).toUpperCase()}${line.slice(1)}`);
         }
       }
@@ -56,7 +67,7 @@ export function renderMarkdown(report) {
     lines.push('## Skipped files');
     lines.push('');
     for (const item of report.skipped) {
-      lines.push(`- ${cell(item.file)}: ${item.reason}`);
+      lines.push(`- ${cell(item.file)}: ${text(item.reason)}`);
     }
     lines.push('');
   }

@@ -32,10 +32,16 @@ function isLiteralSecret(value) {
 }
 
 function scanAuthHeaders(node, findings, seen) {
-  const headers = node.parameters?.headers;
-  const list = isPlainObject(headers) && Array.isArray(headers.parameters)
-    ? headers.parameters
-    : [];
+  // current n8n stores header auth under headerParameters; older workflows
+  // under headers. Both shapes must be scanned or leaks score as clean.
+  const params = node.parameters ?? {};
+  const list = [];
+  for (const key of ['headers', 'headerParameters']) {
+    const headers = params[key];
+    if (isPlainObject(headers) && Array.isArray(headers.parameters)) {
+      list.push(...headers.parameters);
+    }
+  }
   for (const header of list) {
     if (!isPlainObject(header)) continue;
     if (String(header.name || '').toLowerCase() !== 'authorization') continue;

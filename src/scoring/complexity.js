@@ -24,23 +24,25 @@ export function expressionDepth(workflow) {
   let max = 0;
   let where = null;
 
-  const walk = (value, node) => {
-    if (typeof value === 'string') {
-      const count = value.split('{{').length - 1;
-      if (count > max) {
-        max = count;
-        where = node ? node.name : where;
+  // iterative walk: deeply nested parameter trees must not exhaust the stack
+  const nodes = Array.isArray(workflow?.nodes) ? workflow.nodes : [];
+  for (const node of nodes) {
+    if (!node || node.parameters === undefined) continue;
+    const todo = [node.parameters];
+    while (todo.length > 0) {
+      const value = todo.pop();
+      if (typeof value === 'string') {
+        const count = value.split('{{').length - 1;
+        if (count > max) {
+          max = count;
+          where = node ? node.name : where;
+        }
+      } else if (Array.isArray(value)) {
+        for (const item of value) todo.push(item);
+      } else if (value && typeof value === 'object') {
+        for (const child of Object.values(value)) todo.push(child);
       }
-    } else if (Array.isArray(value)) {
-      for (const item of value) walk(item, node);
-    } else if (value && typeof value === 'object') {
-      for (const child of Object.values(value)) walk(child, node);
     }
-  };
-
-  for (const node of workflow.nodes || []) {
-    if (!node || !node.parameters) continue;
-    walk(node.parameters, node);
   }
   return { depth: max, node: where };
 }
