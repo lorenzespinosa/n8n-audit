@@ -1,0 +1,87 @@
+{
+  "name": "CRM nightly sync",
+  "active": true,
+  "nodes": [
+    {
+      "name": "Every night",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [0, 200],
+      "parameters": { "rule": { "interval": [{ "field": "days", "daysInterval": 1 }] } }
+    },
+    {
+      "name": "Fetch deals",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [220, 100],
+      "parameters": { "url": "https://crm.example.com/deals", "options": {} },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "name": "Fetch contacts",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [220, 320],
+      "parameters": { "url": "https://crm.example.com/contacts", "options": {} },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "name": "Log fetch failure",
+      "type": "n8n-nodes-base.noOp",
+      "position": [440, -60],
+      "parameters": {}
+    },
+    {
+      "name": "Map records",
+      "type": "n8n-nodes-base.set",
+      "position": [460, 200],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "a1", "name": "dealName", "value": "={{ $json.title }}", "type": "string" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Upsert into Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "position": [680, 200],
+      "parameters": { "operation": "insert", "table": "deals_current" },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "name": "Send failure alert",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [900, 40],
+      "parameters": { "to": "ops@example.com", "subject": "CRM sync failed" }
+    }
+  ],
+  "connections": {
+    "Every night": {
+      "main": [
+        [
+          { "node": "Fetch deals", "type": "main", "index": 0 },
+          { "node": "Fetch contacts", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Fetch deals": {
+      "main": [
+        [{ "node": "Map records", "type": "main", "index": 0 }],
+        [{ "node": "Log fetch failure", "type": "main", "index": 0 }]
+      ]
+    },
+    "Fetch contacts": {
+      "main": [[{ "node": "Map records", "type": "main", "index": 0 }]]
+    },
+    "Map records": {
+      "main": [[{ "node": "Upsert into Postgres", "type": "main", "index": 0 }]]
+    },
+    "Upsert into Postgres": {
+      "main": [
+        [],
+        [{ "node": "Send failure alert", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": { "errorWorkflow": "wf_error_handler" },
+  "tags": ["clean", "fixture"]
+}

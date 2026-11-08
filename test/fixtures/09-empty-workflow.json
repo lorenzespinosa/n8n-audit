@@ -1,0 +1,8 @@
+{
+  "name": "Empty shell",
+  "active": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {},
+  "tags": ["edge-case", "fixture"]
+}

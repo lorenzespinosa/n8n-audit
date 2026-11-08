@@ -1,0 +1,46 @@
+{
+  "name": "Support tickets digest",
+  "active": true,
+  "nodes": [
+    {
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [0, 200],
+      "parameters": { "path": "tickets", "httpMethod": "POST" },
+      "webhookId": "f1f2f3f4-0000-4000-8000-000000000003"
+    },
+    {
+      "name": "Call tickets API",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [220, 200],
+      "parameters": { "url": "https://api.support.example.com/tickets", "options": {} },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "name": "Call users API",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [440, 200],
+      "parameters": { "url": "https://api.support.example.com/users", "options": {} }
+    },
+    {
+      "name": "Format response",
+      "type": "n8n-nodes-base.code",
+      "position": [660, 200],
+      "parameters": { "jsCode": "return items.map(i => ({ json: { text: i.json.name } }));" },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Call tickets API", "type": "main", "index": 0 }]]
+    },
+    "Call tickets API": {
+      "main": [[{ "node": "Call users API", "type": "main", "index": 0 }]]
+    },
+    "Call users API": {
+      "main": [[{ "node": "Format response", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "errorWorkflow": "wf_alerts" },
+  "tags": ["partial", "fixture"]
+}

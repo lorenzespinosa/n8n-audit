@@ -1,0 +1,56 @@
+{
+  "name": "Auto named pipeline",
+  "active": false,
+  "nodes": [
+    {
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [0, 200],
+      "parameters": { "path": "reports", "httpMethod": "GET" },
+      "webhookId": "f1f2f3f4-0000-4000-8000-000000000002"
+    },
+    {
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [220, 200],
+      "parameters": { "url": "https://api.example.com/reports", "options": {} },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "position": [440, 200],
+      "parameters": { "jsCode": "return items;" },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "position": [660, 200],
+      "parameters": { "assignments": { "assignments": [] } }
+    },
+    {
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [160, 420],
+      "parameters": {
+        "content": "Turn webhook payload into a report.",
+        "height": 120,
+        "width": 200
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "HTTP Request1", "type": "main", "index": 0 }]]
+    },
+    "HTTP Request1": {
+      "main": [[{ "node": "Code", "type": "main", "index": 0 }]]
+    },
+    "Code": {
+      "main": [[{ "node": "Set1", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {},
+  "tags": ["naming", "fixture"]
+}

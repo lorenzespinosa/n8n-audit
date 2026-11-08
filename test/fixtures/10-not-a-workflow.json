@@ -1,0 +1,6 @@
+{
+  "name": "leftover-package",
+  "version": "1.2.3",
+  "description": "a random JSON file that is not a workflow",
+  "main": "index.js"
+}

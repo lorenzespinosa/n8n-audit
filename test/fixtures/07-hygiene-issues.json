@@ -1,0 +1,58 @@
+{
+  "name": "Kitchen sink hygiene",
+  "active": false,
+  "nodes": [
+    {
+      "name": "Go",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [0, 200],
+      "parameters": {}
+    },
+    {
+      "name": "Fetch weekly report",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [220, 200],
+      "parameters": { "url": "https://reports.example.com/weekly", "options": {} },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "name": "Email the boss",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [660, 200],
+      "parameters": { "to": "boss@example.com", "subject": "Weekly report" },
+      "disabled": true
+    },
+    {
+      "name": "Old draft step",
+      "type": "n8n-nodes-base.set",
+      "position": [440, 420],
+      "parameters": { "assignments": { "assignments": [] } }
+    },
+    {
+      "name": "Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [160, 420],
+      "parameters": { "content": "", "height": 100, "width": 180 }
+    },
+    {
+      "name": "Reminder",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [360, 560],
+      "parameters": {
+        "content": "Sends the weekly report to the boss.",
+        "height": 100,
+        "width": 180
+      }
+    }
+  ],
+  "connections": {
+    "Go": {
+      "main": [[{ "node": "Fetch weekly report", "type": "main", "index": 0 }]]
+    },
+    "Fetch weekly report": {
+      "main": [[{ "node": "Email the boss", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {},
+  "tags": ["hygiene", "fixture"]
+}

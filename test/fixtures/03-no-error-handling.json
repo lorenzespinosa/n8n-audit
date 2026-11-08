@@ -1,0 +1,44 @@
+{
+  "name": "Payments settle without a net",
+  "active": true,
+  "nodes": [
+    {
+      "name": "Inbox webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [0, 200],
+      "parameters": { "path": "payments", "httpMethod": "POST" },
+      "webhookId": "f1f2f3f4-0000-4000-8000-000000000001"
+    },
+    {
+      "name": "Call payments API",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [220, 200],
+      "parameters": { "url": "https://api.payments.example.com/v1/settle", "options": {} }
+    },
+    {
+      "name": "Validate payload",
+      "type": "n8n-nodes-base.code",
+      "position": [440, 200],
+      "parameters": { "jsCode": "return items.filter(i => i.json.amount > 0);" }
+    },
+    {
+      "name": "Save to ledger",
+      "type": "n8n-nodes-base.postgres",
+      "position": [660, 200],
+      "parameters": { "operation": "insert", "table": "ledger" }
+    }
+  ],
+  "connections": {
+    "Inbox webhook": {
+      "main": [[{ "node": "Call payments API", "type": "main", "index": 0 }]]
+    },
+    "Call payments API": {
+      "main": [[{ "node": "Validate payload", "type": "main", "index": 0 }]]
+    },
+    "Validate payload": {
+      "main": [[{ "node": "Save to ledger", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {},
+  "tags": ["no-error-handling", "fixture"]
+}

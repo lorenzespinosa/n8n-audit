@@ -1,0 +1,1282 @@
+{
+  "name": "Heavy nightly batch",
+  "active": true,
+  "nodes": [
+    {
+      "name": "Kick off",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        0,
+        200
+      ],
+      "parameters": {}
+    },
+    {
+      "name": "Step 01",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        80,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p01",
+              "name": "pass01",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 02",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        160,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p02",
+              "name": "pass02",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 03",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        240,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p03",
+              "name": "pass03",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 04",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        320,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p04",
+              "name": "pass04",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 05",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        400,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p05",
+              "name": "pass05",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 06",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        480,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p06",
+              "name": "pass06",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 07",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        560,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p07",
+              "name": "pass07",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 08",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        640,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p08",
+              "name": "pass08",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 09",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        720,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p09",
+              "name": "pass09",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 10",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        800,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p10",
+              "name": "pass10",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 11",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        880,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p11",
+              "name": "pass11",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 12",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        960,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p12",
+              "name": "pass12",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 13",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1040,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p13",
+              "name": "pass13",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 14",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1120,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p14",
+              "name": "pass14",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 15",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1200,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p15",
+              "name": "pass15",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 16",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1280,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p16",
+              "name": "pass16",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 17",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1360,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p17",
+              "name": "pass17",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 18",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1440,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p18",
+              "name": "pass18",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 19",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1520,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p19",
+              "name": "pass19",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 20",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1600,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p20",
+              "name": "pass20",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 21",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1680,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p21",
+              "name": "pass21",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 22",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1760,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p22",
+              "name": "pass22",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 23",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1840,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p23",
+              "name": "pass23",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 24",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1920,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p24",
+              "name": "pass24",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 25",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2000,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p25",
+              "name": "pass25",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 26",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2080,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p26",
+              "name": "pass26",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 27",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2160,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p27",
+              "name": "pass27",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 28",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2240,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p28",
+              "name": "pass28",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 29",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2320,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p29",
+              "name": "pass29",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 30",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2400,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c30",
+              "name": "combined",
+              "value": "{{ $json.a }} {{ $json.b }} {{ $json.c }} {{ $json.d }} {{ $json.e }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 31",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2480,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p31",
+              "name": "pass31",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 32",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2560,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p32",
+              "name": "pass32",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 33",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2640,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p33",
+              "name": "pass33",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 34",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2720,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p34",
+              "name": "pass34",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 35",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2800,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p35",
+              "name": "pass35",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 36",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2880,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p36",
+              "name": "pass36",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 37",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2960,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p37",
+              "name": "pass37",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 38",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        3040,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p38",
+              "name": "pass38",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 39",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        3120,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p39",
+              "name": "pass39",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Step 40",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        3200,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p40",
+              "name": "pass40",
+              "value": "={{ $json.payload }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Runbook",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        320,
+        420
+      ],
+      "parameters": {
+        "content": "Nightly batch. Ask ops before editing.",
+        "height": 140,
+        "width": 240
+      }
+    }
+  ],
+  "connections": {
+    "Kick off": {
+      "main": [
+        [
+          {
+            "node": "Step 01",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 01": {
+      "main": [
+        [
+          {
+            "node": "Step 02",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 02": {
+      "main": [
+        [
+          {
+            "node": "Step 03",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 03": {
+      "main": [
+        [
+          {
+            "node": "Step 04",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 04": {
+      "main": [
+        [
+          {
+            "node": "Step 05",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 05": {
+      "main": [
+        [
+          {
+            "node": "Step 06",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 06": {
+      "main": [
+        [
+          {
+            "node": "Step 07",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 07": {
+      "main": [
+        [
+          {
+            "node": "Step 08",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 08": {
+      "main": [
+        [
+          {
+            "node": "Step 09",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 09": {
+      "main": [
+        [
+          {
+            "node": "Step 10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 10": {
+      "main": [
+        [
+          {
+            "node": "Step 11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 11": {
+      "main": [
+        [
+          {
+            "node": "Step 12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 12": {
+      "main": [
+        [
+          {
+            "node": "Step 13",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 13": {
+      "main": [
+        [
+          {
+            "node": "Step 14",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 14": {
+      "main": [
+        [
+          {
+            "node": "Step 15",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 15": {
+      "main": [
+        [
+          {
+            "node": "Step 16",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 16": {
+      "main": [
+        [
+          {
+            "node": "Step 17",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 17": {
+      "main": [
+        [
+          {
+            "node": "Step 18",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 18": {
+      "main": [
+        [
+          {
+            "node": "Step 19",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 19": {
+      "main": [
+        [
+          {
+            "node": "Step 20",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 20": {
+      "main": [
+        [
+          {
+            "node": "Step 21",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 21": {
+      "main": [
+        [
+          {
+            "node": "Step 22",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 22": {
+      "main": [
+        [
+          {
+            "node": "Step 23",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 23": {
+      "main": [
+        [
+          {
+            "node": "Step 24",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 24": {
+      "main": [
+        [
+          {
+            "node": "Step 25",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 25": {
+      "main": [
+        [
+          {
+            "node": "Step 26",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 26": {
+      "main": [
+        [
+          {
+            "node": "Step 27",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 27": {
+      "main": [
+        [
+          {
+            "node": "Step 28",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 28": {
+      "main": [
+        [
+          {
+            "node": "Step 29",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 29": {
+      "main": [
+        [
+          {
+            "node": "Step 30",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 30": {
+      "main": [
+        [
+          {
+            "node": "Step 31",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 31": {
+      "main": [
+        [
+          {
+            "node": "Step 32",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 32": {
+      "main": [
+        [
+          {
+            "node": "Step 33",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 33": {
+      "main": [
+        [
+          {
+            "node": "Step 34",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 34": {
+      "main": [
+        [
+          {
+            "node": "Step 35",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 35": {
+      "main": [
+        [
+          {
+            "node": "Step 36",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 36": {
+      "main": [
+        [
+          {
+            "node": "Step 37",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 37": {
+      "main": [
+        [
+          {
+            "node": "Step 38",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 38": {
+      "main": [
+        [
+          {
+            "node": "Step 39",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 39": {
+      "main": [
+        [
+          {
+            "node": "Step 40",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 40": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "errorWorkflow": "wf_ops"
+  },
+  "tags": [
+    "complexity",
+    "fixture"
+  ]
+}
